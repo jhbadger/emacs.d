@@ -293,13 +293,12 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
 (add-hook 'inferior-lisp-mode-hook (lambda () (inferior-slime-mode t)))
 
 (defconst jw-eval-buffer-commands
-  '(("js" . "/usr/local/bin/node")
-    ("rb" . "/usr/local/bin/ruby")
-    ("coffee" . "/usr/local/bin/coffee")
-    ("clj" . "/Users/jim/local/bin/clojure")
-    ("py" . "/usr/local/bin/python")
-    ("ex" . "/usr/local/bin/elixir")
-    ("exs" . "/usr/local/bin/elixir")))
+  '(("js" . "/usr/bin/env node")
+    ("rb" . "/usr/bin/env ruby")
+    ("coffee" . "/usr/bin/env coffee")
+    ("py" . "/usr/bin/env python")
+    ("ex" . "/usr/bin/env elixir")
+    ("exs" . "/usr/bin/env elixir")))
 
 (defconst jw-eval-buffer-name "*EVALBUFFER*")
 
