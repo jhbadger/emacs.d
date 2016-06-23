@@ -1,4 +1,5 @@
 (require 'cl)
+
 (load "package")
 (defun set-exec-path-from-shell-PATH ()
   "Set up Emacs' `exec-path' and PATH environment variable to match that used by the user's shell.
@@ -18,7 +19,7 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
 	     '("melpa" . "http://melpa.milkbox.net/packages/") t)
 
 (setq package-archive-enable-alist '(("melpa" deft magit)))
-(defvar packages '(ac-slime
+(defvar packages '(
 			  auto-complete
 			  autopair
 			  clojure-mode
@@ -61,6 +62,8 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
 			  inf-clojure
 			  )
     "Default packages")
+
+(require 'slime)
 
 (defun packages-installed-p ()
   (loop for pkg in packages
@@ -166,14 +169,6 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
 
 (defun engage-lisp-power ()
   (lisp-power-mode t))
-
-(dolist (mode lisp-modes)
-  (add-hook (intern (format "%s-hook" mode))
-	    #'engage-lisp-power))
-
-(setq inferior-lisp-program "clisp")
-(setq scheme-program-name "racket")
-
 
 (require 'auto-complete-config)
 (ac-config-default)
@@ -289,3 +284,62 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
+
+(setq inferior-lisp-program "ros run")
+
+(add-to-list 'auto-mode-alist '("\\.lfr\\'" . lisp-mode))
+(add-hook 'lisp-mode-hook (lambda () (slime-mode t)))
+(add-hook 'inferior-lisp-mode-hook (lambda () (inferior-slime-mode t)))
+
+(defconst jw-eval-buffer-commands
+  '(("js" . "/usr/local/bin/node")
+    ("rb" . "/usr/local/bin/ruby")
+    ("coffee" . "/usr/local/bin/coffee")
+    ("clj" . "/Users/jim/local/bin/clojure")
+    ("py" . "/usr/local/bin/python")
+    ("ex" . "/usr/local/bin/elixir")
+    ("exs" . "/usr/local/bin/elixir")))
+
+(defconst jw-eval-buffer-name "*EVALBUFFER*")
+
+(defun jw-eval-buffer ()
+  "Evaluate the current buffer and display the result in a buffer."
+  (interactive)
+  (save-buffer)
+  (let* ((file-name (buffer-file-name (current-buffer)))
+	 (file-extension (file-name-extension file-name))
+	 (buffer-eval-command-pair (assoc file-extension jw-eval-buffer-commands)))
+    (if buffer-eval-command-pair
+	(let ((command (concat (cdr buffer-eval-command-pair) " " file-name)))
+	  (shell-command-on-region (point-min) (point-max) command jw-eval-buffer-name nil)
+	  (pop-to-buffer jw-eval-buffer-name)
+	  (other-window 1)
+	  (jw-eval-buffer-pretty-up-errors jw-eval-buffer-name)
+	  (message ".."))
+      (message "Unknown buffer type"))))
+
+(defun jw-eval-buffer-pretty-up-errors (buffer)
+  "Fix up the buffer to highlight the error message (if it contains one)."
+  (save-excursion
+    (set-buffer buffer)
+    (goto-char (point-min))
+    (let ((pos (search-forward-regexp "\\.rb:[0-9]+:\\(in.+:\\)? +" (point-max) t)))
+      (if pos (progn
+		(goto-char pos)
+		(insert-string "\n\n")
+		(end-of-line)
+		(insert-string "\n"))))))
+
+(defun jw-clear-eval-buffer ()
+  (interactive)
+  (save-excursion
+    (set-buffer jw-eval-buffer-name)
+    (kill-region (point-min) (point-max))))
+
+(defun jw-eval-or-clear-buffer (n)
+  (interactive "P")
+  (cond ((null n) (jw-eval-buffer))
+	(t (jw-clear-eval-buffer)))  )
+
+(global-set-key [f5] 'jw-eval-buffer)
