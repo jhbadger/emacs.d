@@ -63,8 +63,6 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
 			  )
     "Default packages")
 
-(require 'slime)
-
 (defun packages-installed-p ()
   (loop for pkg in packages
 	when (not (package-installed-p pkg)) do (return nil)
@@ -289,8 +287,6 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
 (setq inferior-lisp-program "ros run")
 
 (add-to-list 'auto-mode-alist '("\\.lfr\\'" . lisp-mode))
-(add-hook 'lisp-mode-hook (lambda () (slime-mode t)))
-(add-hook 'inferior-lisp-mode-hook (lambda () (inferior-slime-mode t)))
 
 (defconst jw-eval-buffer-commands
   '(("js" . "/usr/bin/env node")
