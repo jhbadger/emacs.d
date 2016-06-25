@@ -14,59 +14,59 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
 (setq inferior-julia-program-name "julia")
 (package-initialize)
 (add-to-list 'package-archives
-	     '("marmalade" . "http://marmalade-repo.org/packages/"))
+             '("marmalade" . "http://marmalade-repo.org/packages/"))
 (add-to-list 'package-archives
-	     '("melpa" . "http://melpa.milkbox.net/packages/") t)
+             '("melpa" . "http://melpa.milkbox.net/packages/") t)
 
 (setq package-archive-enable-alist '(("melpa" deft magit)))
 (defvar packages '(
-			  auto-complete
-			  autopair
-			  clojure-mode
-			  coffee-mode
-			  csharp-mode
-			  deft
-			  erlang
-			  feature-mode
-			  flycheck
-			  gist
-			  go-autocomplete
-			  go-eldoc
-			  go-mode
-			  graphviz-dot-mode
-			  haml-mode
-			  haskell-mode
-			  htmlize
-			  idris-mode
-			  magit
-			  markdown-mode
-			  marmalade
-			  nodejs-repl
-			  o-blog
-			  org
-			  paredit
-			  php-mode
-			  puppet-mode
-			  restclient
-			  rvm
-			  scala-mode
-			  smex
-			  sml-mode
-			  solarized-theme
-			  web-mode
-			  writegood-mode
-			  yaml-mode
-			  julia-mode
-			  picolisp-mode
-			  warm-night-theme
-			  inf-clojure
-			  )
-    "Default packages")
+                   auto-complete
+                   autopair
+                   clojure-mode
+                   coffee-mode
+                   csharp-mode
+                   deft
+                   erlang
+                   feature-mode
+                   flycheck
+                   gist
+                   go-autocomplete
+                   go-eldoc
+                   go-mode
+                   graphviz-dot-mode
+                   haml-mode
+                   haskell-mode
+                   htmlize
+                   idris-mode
+                   magit
+                   markdown-mode
+                   marmalade
+                   nodejs-repl
+                   o-blog
+                   org
+                   paredit
+                   php-mode
+                   puppet-mode
+                   restclient
+                   rvm
+                   scala-mode
+                   smex
+                   sml-mode
+                   solarized-theme
+                   web-mode
+                   writegood-mode
+                   yaml-mode
+                   julia-mode
+                   picolisp-mode
+                   warm-night-theme
+                   inf-clojure
+                   )
+  "Default packages")
 
 (defun packages-installed-p ()
   (loop for pkg in packages
-	when (not (package-installed-p pkg)) do (return nil)
-	finally (return t)))
+        when (not (package-installed-p pkg)) do (return nil)
+        finally (return t)))
 
 (unless (packages-installed-p)
   (message "%s" "Refreshing package database...")
@@ -108,18 +108,18 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
       org-todo-keywords '((sequence "TODO" "INPROGRESS" "DONE"))
       org-todo-keyword-faces '(("INPROGRESS" . (:foreground "blue" :weight bold))))
 (add-hook 'org-mode-hook
-	  (lambda ()
-	    (flyspell-mode)))
+          (lambda ()
+            (flyspell-mode)))
 (add-hook 'org-mode-hook
-	  (lambda ()
-	    (writegood-mode)))
+          (lambda ()
+            (writegood-mode)))
 
 (global-set-key (kbd "C-c a") 'org-agenda)
 (setq org-agenda-show-log t
       org-agenda-todo-ignore-scheduled t
       org-agenda-todo-ignore-deadlines t)
 (setq org-agenda-files (list "~/Dropbox/org/personal.org"
-			     "~/Dropbox/org/groupon.org"))
+                             "~/Dropbox/org/groupon.org"))
 
 (require 'org)
 (require 'org-install)
@@ -134,10 +134,10 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
 (setq org-src-fontify-natively t)
 
 (add-hook 'org-babel-after-execute-hook (lambda ()
-					  (condition-case nil
-					      (org-display-inline-images)
-					    (error nil)))
-	            'append)
+                                          (condition-case nil
+                                              (org-display-inline-images)
+                                            (error nil)))
+          'append)
 
 (setq deft-directory "~/Dropbox/deft")
 (setq deft-use-filename-as-title t)
@@ -152,10 +152,10 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
 (require 'autopair)
 
 (setq lisp-modes '(lisp-mode
-		   emacs-lisp-mode
-		   common-lisp-mode
-		   scheme-mode
-		   clojure-mode))
+                   emacs-lisp-mode
+                   common-lisp-mode
+                   scheme-mode
+                   clojure-mode))
 
 (defvar lisp-power-map (make-keymap))
 (define-minor-mode lisp-power-mode "Fix keybindings; add power."
@@ -247,6 +247,9 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
 (defun xlispstat ()
   (interactive)
   (inferior-lisp "xlispstat"))
+(defun lfr ()
+  (interactive)
+  (inferior-lisp "lfr"))
 (defun planck ()
   (interactive)
   (inf-clojure "planck"))
@@ -256,15 +259,15 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
 (add-to-list 'auto-mode-alist '("\\.l$" . picolisp-mode))
 
 (org-babel-do-load-languages
-   'org-babel-load-languages
-   '((R . t)
-     (julia .t)
-     (ruby . t)
-     (python . t)
-     (clojure . t)
-     (lisp . t)
-     (picolisp . t)
-     ))
+ 'org-babel-load-languages
+ '((R . t)
+   (julia .t)
+   (ruby . t)
+   (python . t)
+   (clojure . t)
+   (lisp . t)
+   (picolisp . t)
+   ))
 (setq org-confirm-babel-evaluate nil)
 
 (custom-set-variables
@@ -303,15 +306,15 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
   (interactive)
   (save-buffer)
   (let* ((file-name (buffer-file-name (current-buffer)))
-	 (file-extension (file-name-extension file-name))
-	 (buffer-eval-command-pair (assoc file-extension jw-eval-buffer-commands)))
+         (file-extension (file-name-extension file-name))
+         (buffer-eval-command-pair (assoc file-extension jw-eval-buffer-commands)))
     (if buffer-eval-command-pair
-	(let ((command (concat (cdr buffer-eval-command-pair) " " file-name)))
-	  (shell-command-on-region (point-min) (point-max) command jw-eval-buffer-name nil)
-	  (pop-to-buffer jw-eval-buffer-name)
-	  (other-window 1)
-	  (jw-eval-buffer-pretty-up-errors jw-eval-buffer-name)
-	  (message ".."))
+        (let ((command (concat (cdr buffer-eval-command-pair) " " file-name)))
+          (shell-command-on-region (point-min) (point-max) command jw-eval-buffer-name nil)
+          (pop-to-buffer jw-eval-buffer-name)
+          (other-window 1)
+          (jw-eval-buffer-pretty-up-errors jw-eval-buffer-name)
+          (message ".."))
       (message "Unknown buffer type"))))
 
 (defun jw-eval-buffer-pretty-up-errors (buffer)
@@ -321,10 +324,10 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
     (goto-char (point-min))
     (let ((pos (search-forward-regexp "\\.rb:[0-9]+:\\(in.+:\\)? +" (point-max) t)))
       (if pos (progn
-		(goto-char pos)
-		(insert-string "\n\n")
-		(end-of-line)
-		(insert-string "\n"))))))
+                (goto-char pos)
+                (insert-string "\n\n")
+                (end-of-line)
+                (insert-string "\n"))))))
 
 (defun jw-clear-eval-buffer ()
   (interactive)
@@ -335,6 +338,6 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
 (defun jw-eval-or-clear-buffer (n)
   (interactive "P")
   (cond ((null n) (jw-eval-buffer))
-	(t (jw-clear-eval-buffer)))  )
+        (t (jw-clear-eval-buffer)))  )
 
 (global-set-key [f5] 'jw-eval-buffer)
