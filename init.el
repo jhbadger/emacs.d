@@ -1,5 +1,4 @@
-(require 'cl)
-
+(byte-recompile-directory (expand-file-name "~/.emacs.d") 0)
 (load "package")
 (defun set-exec-path-from-shell-PATH ()
   "Set up Emacs' `exec-path' and PATH environment variable to match that used by the user's shell.
@@ -11,69 +10,7 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
     (setq exec-path (split-string path-from-shell path-separator))))
 (set-exec-path-from-shell-PATH)
 (add-to-list 'load-path "~/.emacs.d/lisp")
-(setq inferior-julia-program-name "julia")
 (package-initialize)
-(add-to-list 'package-archives
-             '("marmalade" . "http://marmalade-repo.org/packages/"))
-(add-to-list 'package-archives
-             '("melpa" . "http://melpa.milkbox.net/packages/") t)
-
-(setq package-archive-enable-alist '(("melpa" deft magit)))
-(defvar packages '(
-                   auto-complete
-                   autopair
-                   clojure-mode
-                   coffee-mode
-                   csharp-mode
-                   deft
-                   erlang
-                   feature-mode
-                   flycheck
-                   gist
-                   go-autocomplete
-                   go-eldoc
-                   go-mode
-                   graphviz-dot-mode
-                   haml-mode
-                   haskell-mode
-                   htmlize
-                   idris-mode
-                   magit
-                   markdown-mode
-                   marmalade
-                   nodejs-repl
-                   o-blog
-                   org
-                   paredit
-                   php-mode
-                   puppet-mode
-                   restclient
-                   rvm
-                   scala-mode
-                   smex
-                   sml-mode
-                   solarized-theme
-                   web-mode
-                   writegood-mode
-                   yaml-mode
-                   julia-mode
-                   picolisp-mode
-                   warm-night-theme
-                   inf-clojure
-                   )
-  "Default packages")
-
-(defun packages-installed-p ()
-  (loop for pkg in packages
-        when (not (package-installed-p pkg)) do (return nil)
-        finally (return t)))
-
-(unless (packages-installed-p)
-  (message "%s" "Refreshing package database...")
-  (package-refresh-contents)
-  (dolist (pkg packages)
-    (when (not (package-installed-p pkg))
-      (package-install pkg))))
 
 (setq inhibit-splash-screen t
       initial-scratch-message nil
@@ -104,58 +41,8 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
       visible-bell t)
 (show-paren-mode t)
 
-(setq org-log-done t
-      org-todo-keywords '((sequence "TODO" "INPROGRESS" "DONE"))
-      org-todo-keyword-faces '(("INPROGRESS" . (:foreground "blue" :weight bold))))
-(add-hook 'org-mode-hook
-          (lambda ()
-            (flyspell-mode)))
-(add-hook 'org-mode-hook
-          (lambda ()
-            (writegood-mode)))
-
-(global-set-key (kbd "C-c a") 'org-agenda)
-(setq org-agenda-show-log t
-      org-agenda-todo-ignore-scheduled t
-      org-agenda-todo-ignore-deadlines t)
-(setq org-agenda-files (list "~/Dropbox/org/personal.org"
-                             "~/Dropbox/org/groupon.org"))
-
-(require 'org)
-(require 'org-install)
-(require 'org-habit)
-(add-to-list 'org-modules "org-habit")
-(setq org-habit-preceding-days 7
-      org-habit-following-days 1
-      org-habit-graph-column 80
-      org-habit-show-habits-only-for-today t
-      org-habit-show-all-today t)
-
-(setq org-src-fontify-natively t)
-
-(add-hook 'org-babel-after-execute-hook (lambda ()
-                                          (condition-case nil
-                                              (org-display-inline-images)
-                                            (error nil)))
-          'append)
-
-(setq deft-directory "~/Dropbox/deft")
-(setq deft-use-filename-as-title t)
-(setq deft-extension "org")
-(setq deft-text-mode 'org-mode)
-
-(setq column-number-mode t)
-
 (setq backup-directory-alist `((".*" . ,temporary-file-directory)))
 (setq auto-save-file-name-transforms `((".*" ,temporary-file-directory t)))
-
-(require 'autopair)
-
-(setq lisp-modes '(lisp-mode
-                   emacs-lisp-mode
-                   common-lisp-mode
-                   scheme-mode
-                   clojure-mode))
 
 (defvar lisp-power-map (make-keymap))
 (define-minor-mode lisp-power-mode "Fix keybindings; add power."
@@ -168,7 +55,6 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
 (defun engage-lisp-power ()
   (lisp-power-mode t))
 
-(require 'auto-complete-config)
 (ac-config-default)
 
 (defun untabify-buffer ()
@@ -190,7 +76,6 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
 
 (setq-default show-trailing-whitespace t)
 
-(setq flyspell-issue-welcome-flag nil)
 (if (eq system-type 'darwin)
     (setq-default ispell-program-name "/usr/local/bin/aspell")
   (setq-default ispell-program-name "/usr/bin/aspell"))
@@ -218,14 +103,6 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
   (set 'tab-width 2))
 
 (add-hook 'coffee-mode-hook 'coffee-custom)
-
-(defun js-custom ()
-  "js-mode-hook"
-  (setq js-indent-level 2))
-
-(add-hook 'js-mode-hook 'js-custom)
-
-(require 'go-autocomplete)
 
 (add-hook 'go-mode-hook
           (lambda ()
@@ -261,7 +138,6 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
 (org-babel-do-load-languages
  'org-babel-load-languages
  '((R . t)
-   (julia .t)
    (ruby . t)
    (python . t)
    (clojure . t)
