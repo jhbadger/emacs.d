@@ -1,5 +1,20 @@
 (byte-recompile-directory (expand-file-name "~/.emacs.d") 0)
 (load "package")
+;; ESS mode configuration (only if ess is in a nonstandard place)
+(add-to-list 'load-path "/usr/local/share/emacs/site-lisp/ess")
+(autoload 'R-mode "ess-site.el" "ESS" t)
+(add-to-list 'auto-mode-alist '("\\.R$" . R-mode))
+(setq inferior-R-program-name "/path/to/R");;<<CHANGE
+;;R stuff
+(setq ess-eval-visibly-p nil)
+(setq ess-ask-for-ess-directory nil)
+(require 'ess-eldoc)
+;;compile the first target in the Makefile in the current directory using F9
+(global-set-key [f9] 'compile)
+(setq compilation-read-command nil)
+;;show matching parentheses
+(show-paren-mode 1)
+
 (defun set-exec-path-from-shell-PATH ()
   "Set up Emacs' `exec-path' and PATH environment variable to match that used by the user's shell.
 
@@ -23,6 +38,7 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
 (setq-default indicate-empty-lines t)
 (when (not indicate-empty-lines)
   (toggle-indicate-empty-lines))
+
 
 (setq make-backup-files nil)
 
@@ -217,3 +233,4 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
         (t (jw-clear-eval-buffer)))  )
 
 (global-set-key [f5] 'jw-eval-buffer)
+(setq org-src-fontify-natively t)
