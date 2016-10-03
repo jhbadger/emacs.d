@@ -1,19 +1,27 @@
+
+;; Added by Package.el.  This must come before configurations of
+;; installed packages.  Don't delete this line.  If you don't want it,
+;; just comment it out by adding a semicolon to the start of the line.
+;; You may delete these explanatory comments.
+(package-initialize)
+
+(require 'package)
 (byte-recompile-directory (expand-file-name "~/.emacs.d") 0)
-(load "package")
-;; ESS mode configuration (only if ess is in a nonstandard place)
-(add-to-list 'load-path "/usr/local/share/emacs/site-lisp/ess")
-(autoload 'R-mode "ess-site.el" "ESS" t)
+(setq package-archives '(
+			 ("marmalade" . "https://marmalade-repo.org/packages/")
+			 ("melpa" . "https://melpa.org/packages/")))
+
+(add-to-list 'load-path "~/.emacs.d/lisp")
 (add-to-list 'auto-mode-alist '("\\.R$" . R-mode))
-(setq inferior-R-program-name "/path/to/R");;<<CHANGE
-;;R stuff
-(setq ess-eval-visibly-p nil)
-(setq ess-ask-for-ess-directory nil)
-(require 'ess-eldoc)
+(add-to-list 'auto-mode-alist '("\\.pl\\'" . prolog-mode))
+(setq inferior-R-program-name "/usr/bin/R")
+(setq inferior-julia-program-name "/usr/local/bin/julia")
 ;;compile the first target in the Makefile in the current directory using F9
 (global-set-key [f9] 'compile)
 (setq compilation-read-command nil)
 ;;show matching parentheses
 (show-paren-mode 1)
+(setq geiser-active-implementations '(chicken))
 
 (defun set-exec-path-from-shell-PATH ()
   "Set up Emacs' `exec-path' and PATH environment variable to match that used by the user's shell.
@@ -25,11 +33,6 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
     (setq exec-path (split-string path-from-shell path-separator))))
 (set-exec-path-from-shell-PATH)
 (add-to-list 'load-path "~/.emacs.d/lisp")
-(package-initialize)
-
-(setq inhibit-splash-screen t
-      initial-scratch-message nil
-      initial-major-mode 'org-mode)
 
 (delete-selection-mode t)
 (transient-mark-mode t)
@@ -71,8 +74,6 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
 (defun engage-lisp-power ()
   (lisp-power-mode t))
 
-(ac-config-default)
-
 (defun untabify-buffer ()
   (interactive)
   (untabify (point-min) (point-max)))
@@ -99,7 +100,7 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
 
 (add-to-list 'auto-mode-alist '("\\.hbs$" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.erb$" . web-mode))
-
+(add-to-list 'auto-mode-alist '("\\.cr$" . ruby-mode))
 (add-hook 'ruby-mode-hook
           (lambda ()
             (autopair-mode)))
@@ -151,26 +152,16 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
 (setq calendar-location-name "Rockville, MD")
 (add-to-list 'auto-mode-alist '("\\.l$" . picolisp-mode))
 
-(org-babel-do-load-languages
- 'org-babel-load-languages
- '((R . t)
-   (ruby . t)
-   (python . t)
-   (clojure . t)
-   (lisp . t)
-   (picolisp . t)
-   ))
-(setq org-confirm-babel-evaluate nil)
-
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(custom-enabled-themes (quote (warm-night)))
+ '(custom-enabled-themes (quote (tango-dark)))
  '(custom-safe-themes
    (quote
-    ("ac2b1fed9c0f0190045359327e963ddad250e131fbf332e80d371b2e1dbc1dc4" default))))
+    ("ac2b1fed9c0f0190045359327e963ddad250e131fbf332e80d371b2e1dbc1dc4" default)))
+ '(show-paren-mode t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -233,4 +224,4 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
         (t (jw-clear-eval-buffer)))  )
 
 (global-set-key [f5] 'jw-eval-buffer)
-(setq org-src-fontify-natively t)
+
