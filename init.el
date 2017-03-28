@@ -4,12 +4,24 @@
 ;; You may delete these explanatory comments.
 (package-initialize)
 
+(setq inferior-lisp-program "/usr/local/bin/sbcl")
+(slime-setup '(slime-fancy)) 
+(setq tab-always-indent 'complete)
+(add-to-list 'completion-styles 'initials t)
 (require 'package)
 (byte-recompile-directory (expand-file-name "~/.emacs.d") 0)
 (add-to-list 'package-archives '("marmalade" .
 				 "https://marmalade-repo.org/packages/") t)
 (add-to-list 'package-archives '("Melpa" .
 				 "https://melpa.org/packages/") t)
+
+(setenv "GOPATH" (concat (getenv "HOME") "/go"))
+(add-to-list 'exec-path (concat (getenv "GOPATH") "/bin"))
+
+(defun auto-complete-for-go ()
+  (auto-complete-mode 1))
+(add-hook 'go-mode-hook 'auto-complete-for-go)
+(add-hook 'before-save-hook 'gofmt-before-save)
 
 (add-to-list 'load-path "~/.emacs.d/lisp")
 (defun turn-off-trailing-whitespace ()
@@ -56,7 +68,7 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(custom-enabled-themes (quote (tango-dark)))
- '(package-selected-packages (quote (geiser go-autocomplete paredit))))
+ '(package-selected-packages (quote (slime flycheck geiser go-autocomplete paredit))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
