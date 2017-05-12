@@ -4,6 +4,7 @@
 ;; You may delete these explanatory comments.
 (package-initialize)
 
+(add-hook 'clojure-mode-hook #'inf-clojure-minor-mode)
 (setq inferior-lisp-program "/usr/local/bin/sbcl")
 (slime-setup '(slime-fancy)) 
 (setq tab-always-indent 'complete)
@@ -68,7 +69,9 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(custom-enabled-themes (quote (tango-dark)))
- '(package-selected-packages (quote (slime flycheck geiser go-autocomplete paredit))))
+ '(package-selected-packages
+   (quote
+    (inf-clojure clojure-mode slime flycheck geiser go-autocomplete paredit))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
