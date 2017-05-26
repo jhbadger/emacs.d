@@ -61,6 +61,14 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
 (add-to-list 'auto-mode-alist '("\\.cr$" . crystal-mode))
 (add-to-list 'interpreter-mode-alist '("crystal" . crystal-mode))
 
+(defun my-nim-mode-config ()
+  "For use in `nim-mode-hook'."
+  (local-set-key (kbd "<f5>") 'nim-compile) ; add a key
+)
+
+;; add to hook
+(add-hook 'nim-mode-hook 'my-nim-mode-config)
+
 
 
 (custom-set-variables
@@ -71,7 +79,7 @@ This is particularly useful under Mac OSX, where GUI apps are not started from a
  '(custom-enabled-themes (quote (tango-dark)))
  '(package-selected-packages
    (quote
-    (inf-clojure clojure-mode slime flycheck geiser go-autocomplete paredit))))
+    (nim-mode inf-clojure clojure-mode slime flycheck geiser go-autocomplete paredit))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
