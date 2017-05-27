@@ -4,10 +4,9 @@
 ;; You may delete these explanatory comments.
 (package-initialize)
 
-;; make PC keyboard's Win key or other to type Super or Hyper,
-;; for emacs running on Windows.
-(setq w32-pass-lwindow-to-system nil)
-(setq w32-lwindow-modifier 'super) ; Left Windows key
+(setq w32-pass-apps-to-system nil)
+(setq w32-apps-modifier 'hyper)
+
 
 (add-hook 'clojure-mode-hook #'inf-clojure-minor-mode)
 (setq inferior-lisp-program "/usr/local/bin/sbcl")
@@ -35,12 +34,11 @@
 (show-paren-mode 1)
 
 
-(exec-path-from-shell-initialize)
 (setq make-backup-files nil)
 (defalias 'yes-or-no-p 'y-or-n-p)
 (setq-default ispell-list-command "list")
 (global-set-key [f7] 'paredit-mode)
-
+;; (setenv "PATH" (mapconcat #'identity exec-path path-separator))
 
 (if (eq system-type 'darwin)
     (setq-default ispell-program-name "/usr/local/bin/aspell")
@@ -63,7 +61,7 @@
 (defun my-nim-mode-config ()
   "For use in `nim-mode-hook'."
   (local-set-key (kbd "<f5>") 'nim-compile) ; add a key
-  (local-set-key (kbd "s-c") 'nim-compile) ; add a key
+  (local-set-key (kbd "H-c") 'nim-compile) ; add a key
 )
 
 ;; add to hook
@@ -79,7 +77,7 @@
  '(custom-enabled-themes (quote (tango-dark)))
  '(package-selected-packages
    (quote
-    (exec-path-from-shell nim-mode inf-clojure clojure-mode slime flycheck geiser go-autocomplete paredit))))
+    (nim-mode inf-clojure clojure-mode slime flycheck geiser go-autocomplete paredit))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
