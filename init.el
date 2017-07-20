@@ -9,8 +9,6 @@
 
 
 (add-hook 'clojure-mode-hook #'inf-clojure-minor-mode)
-(setq inferior-lisp-program "/usr/local/bin/sbcl")
-(slime-setup '(slime-fancy)) 
 (setq tab-always-indent 'complete)
 (add-to-list 'completion-styles 'initials t)
 (require 'package)
@@ -38,11 +36,11 @@
 (defalias 'yes-or-no-p 'y-or-n-p)
 (setq-default ispell-list-command "list")
 (global-set-key [f7] 'paredit-mode)
-;; (setenv "PATH" (mapconcat #'identity exec-path path-separator))
 
 (if (eq system-type 'darwin)
     (setq-default ispell-program-name "/usr/local/bin/aspell")
-  (setq-default ispell-program-name "/usr/bin/aspell"))
+  (setq-default ispell-program-name "/usr/bin/aspell")
+  (setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin")))
 
 
 (defun xlispstat ()
@@ -77,7 +75,7 @@
  '(custom-enabled-themes (quote (tango-dark)))
  '(package-selected-packages
    (quote
-    (nim-mode inf-clojure clojure-mode slime flycheck geiser go-autocomplete paredit))))
+    (suggest nim-mode inf-clojure clojure-mode flycheck geiser go-autocomplete paredit))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
