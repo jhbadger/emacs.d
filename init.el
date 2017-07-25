@@ -56,6 +56,11 @@
 (add-to-list 'auto-mode-alist '("\\.cr$" . crystal-mode))
 (add-to-list 'interpreter-mode-alist '("crystal" . crystal-mode))
 
+(autoload 'red-mode "red.el"
+  "Major mode for red files" t)
+(add-to-list 'auto-mode-alist '("\\.red$" . red-mode))
+(add-to-list 'interpreter-mode-alist '("red" . red-mode))
+
 (defun my-nim-mode-config ()
   "For use in `nim-mode-hook'."
   (local-set-key (kbd "<f5>") 'nim-compile) ; add a key
