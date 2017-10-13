@@ -31,16 +31,15 @@
   (setq show-trailing-whitespace nil))
 (show-paren-mode 1)
 
+(setq exec-path (append "/usr/local/bin/" exec-path))
 
 (setq make-backup-files nil)
 (defalias 'yes-or-no-p 'y-or-n-p)
 (setq-default ispell-list-command "list")
 (global-set-key [f7] 'paredit-mode)
 
-(if (eq system-type 'darwin)
-    (setq-default ispell-program-name "/usr/local/bin/aspell")
-  (setq-default ispell-program-name "/usr/bin/aspell")
-  (setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin")))
+
+(setq-default ispell-program-name "/usr/local/bin/aspell")
 
 
 (defun xlispstat ()
@@ -80,7 +79,7 @@
  '(custom-enabled-themes (quote (tango-dark)))
  '(package-selected-packages
    (quote
-    (suggest nim-mode inf-clojure clojure-mode flycheck geiser go-autocomplete paredit))))
+    (rust-mode swift-mode suggest nim-mode inf-clojure clojure-mode flycheck geiser go-autocomplete paredit))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
