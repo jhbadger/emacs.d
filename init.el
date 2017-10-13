@@ -31,7 +31,8 @@
   (setq show-trailing-whitespace nil))
 (show-paren-mode 1)
 
-(setq exec-path (append "/usr/local/bin/" exec-path))
+(setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
+(setq exec-path (append exec-path '("/usr/local/bin")))
 
 (setq make-backup-files nil)
 (defalias 'yes-or-no-p 'y-or-n-p)
@@ -79,7 +80,7 @@
  '(custom-enabled-themes (quote (tango-dark)))
  '(package-selected-packages
    (quote
-    (rust-mode swift-mode suggest nim-mode inf-clojure clojure-mode flycheck geiser go-autocomplete paredit))))
+    (kotlin-mode rust-mode swift-mode suggest nim-mode inf-clojure clojure-mode flycheck geiser go-autocomplete paredit))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
