@@ -41,7 +41,7 @@
 
 
 (setq-default ispell-program-name "/usr/local/bin/aspell")
-
+(require 'cl-lib)
 
 (defun xlispstat ()
   (interactive)
@@ -66,6 +66,32 @@
   (local-set-key (kbd "<f5>") 'nim-compile) ; add a key
   (local-set-key (kbd "H-c") 'nim-compile) ; add a key
 )
+
+(if (not (fboundp 'filter))
+(defun filter (condp lst)
+  (delq nil
+	(mapcar (lambda (x) (and (funcall condp x) x)) lst))))
+
+(defun sum (s)
+  "return sum of list"
+  (apply '+ s))
+
+(defun product (s)
+  "return sum of list"
+  (apply '* s))
+
+(defun mean (s)
+  "return mean of list"
+  (/ (* 1.0 (sum s)) (length s)))
+
+(defun median (s)
+  "return median of list"
+  (let* ((len (length s))
+	(hlen (/ len 2)))
+    (if (= 1 (% len 2))
+	(nth hlen s)
+      (/ (+ (nth hlen s) (nth (- hlen 1) s)) 2.0)
+      )))
 
 ;; add to hook
 (add-hook 'nim-mode-hook 'my-nim-mode-config)
