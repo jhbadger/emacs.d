@@ -93,6 +93,16 @@
       (/ (+ (nth hlen s) (nth (- hlen 1) s)) 2.0)
       )))
 
+(defun var (s)
+  "return variance of list"
+  (let ((m (mean s))
+	(l (- (length s) 1)))
+    (/ (sum (mapcar (lambda (x) (* (- x m) (- x m))) s )) l)))
+
+(defun sd (s)
+  "return standard deviation of list"
+  (sqrt (var s)))
+
 ;; add to hook
 (add-hook 'nim-mode-hook 'my-nim-mode-config)
 
