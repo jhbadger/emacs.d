@@ -7,7 +7,6 @@
 (setq w32-pass-apps-to-system nil)
 (setq w32-apps-modifier 'hyper)
 
-
 (add-hook 'clojure-mode-hook #'inf-clojure-minor-mode)
 (setq tab-always-indent 'complete)
 (add-to-list 'completion-styles 'initials t)
@@ -116,10 +115,18 @@
  '(custom-enabled-themes (quote (tango-dark)))
  '(package-selected-packages
    (quote
-    (kotlin-mode rust-mode swift-mode suggest nim-mode inf-clojure clojure-mode flycheck geiser go-autocomplete paredit))))
+    (js2-mode js-comint kotlin-mode rust-mode swift-mode suggest nim-mode inf-clojure clojure-mode flycheck geiser go-autocomplete paredit))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
+(add-hook 'js2-mode-hook
+          (lambda ()
+            (local-set-key (kbd "C-x C-e") 'js-send-last-sexp)
+            (local-set-key (kbd "C-M-x") 'js-send-last-sexp-and-go)
+            (local-set-key (kbd "C-c b") 'js-send-buffer)
+            (local-set-key (kbd "C-c C-b") 'js-send-buffer-and-go)
+            (local-set-key (kbd "C-c l") 'js-load-file-and-go)))
