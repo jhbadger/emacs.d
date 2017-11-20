@@ -4,6 +4,7 @@
 ;; You may delete these explanatory comments.
 (package-initialize)
 
+(setq inferior-lisp-program "sbcl")
 (setq w32-pass-apps-to-system nil)
 (setq w32-apps-modifier 'hyper)
 
@@ -151,7 +152,7 @@ operator."
  '(custom-enabled-themes (quote (tango-dark)))
  '(package-selected-packages
    (quote
-    (js2-mode js-comint kotlin-mode rust-mode swift-mode suggest nim-mode inf-clojure clojure-mode flycheck geiser go-autocomplete paredit))))
+    (newlisp-mode slime js2-mode js-comint kotlin-mode rust-mode swift-mode suggest nim-mode inf-clojure clojure-mode flycheck geiser go-autocomplete paredit))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

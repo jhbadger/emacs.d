@@ -1,4 +1,7 @@
 (1
+ (log-mode .
+	   [(0 0 2)
+	    nil "Navigate Log Error Messages" single])
  (zone-quotes .
 	      [(20170919 1825)
 	       ((emacs
@@ -1690,7 +1693,7 @@
 	       (6 1)))
 	     "basic support for magit links" single])
  (org-journal .
-	      [(1 12 1)
+	      [(1 12 3)
 	       nil "a simple org-mode based journaling mode" single])
  (org-gnome .
 	    [(0 1)
@@ -1890,8 +1893,8 @@
 	     [(0 8 8)
 	      nil "Managing multiple terminal buffers in Emacs." single])
  (multi-project .
-		[(0 0 24)
-		 nil "Easily work with multiple projects." single])
+		[(0 0 25)
+		 nil "Find files, compile, search, and switch between" single])
  (multi-eshell .
 	       [(0 0 1)
 		nil "makes it easier to use multiple shells within emacs" single])
