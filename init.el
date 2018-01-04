@@ -8,7 +8,6 @@
 (setq w32-pass-apps-to-system nil)
 (setq w32-apps-modifier 'hyper)
 
-(add-hook 'clojure-mode-hook #'inf-clojure-minor-mode)
 (setq tab-always-indent 'complete)
 (add-to-list 'completion-styles 'initials t)
 (require 'package)
@@ -131,10 +130,11 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(cider-allow-jack-in-without-project (quote t))
  '(custom-enabled-themes (quote (tango-dark)))
  '(package-selected-packages
    (quote
-    (newlisp-mode slime js2-mode js-comint kotlin-mode rust-mode swift-mode suggest nim-mode inf-clojure clojure-mode flycheck geiser go-autocomplete paredit))))
+    (cider newlisp-mode slime js2-mode js-comint kotlin-mode rust-mode swift-mode suggest nim-mode clojure-mode flycheck geiser go-autocomplete paredit))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
