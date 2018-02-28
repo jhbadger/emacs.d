@@ -3,11 +3,12 @@
 ;; just comment it out by adding a semicolon to the start of the line.
 ;; You may delete these explanatory comments.
 (package-initialize)
-
+(add-hook 'after-init-hook #'global-flycheck-mode)
 (setq inferior-lisp-program "sbcl")
 (setq w32-pass-apps-to-system nil)
 (setq w32-apps-modifier 'hyper)
 
+(ac-config-default)
 (setq tab-always-indent 'complete)
 (add-to-list 'completion-styles 'initials t)
 (require 'package)
@@ -134,7 +135,7 @@
  '(custom-enabled-themes (quote (tango-dark)))
  '(package-selected-packages
    (quote
-    (cider newlisp-mode slime js2-mode js-comint kotlin-mode rust-mode swift-mode suggest nim-mode clojure-mode flycheck geiser go-autocomplete paredit))))
+    (typescript-mode cider newlisp-mode slime js2-mode js-comint kotlin-mode rust-mode swift-mode suggest nim-mode clojure-mode flycheck geiser go-autocomplete paredit))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
