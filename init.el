@@ -17,8 +17,9 @@
 				 "https://marmalade-repo.org/packages/") t)
 (add-to-list 'package-archives '("Melpa" .
 				 "https://melpa.org/packages/") t)
-
+(global-set-key [f5] 'compile)
 (setenv "GOPATH" (concat (getenv "HOME") "/go"))
+(setenv "RUBYLIB" "/Users/badgerjh/scripts")
 (add-to-list 'exec-path (concat (getenv "GOPATH") "/bin"))
 
 (defun auto-complete-for-go ()
