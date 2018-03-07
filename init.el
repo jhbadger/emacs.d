@@ -11,12 +11,21 @@
 (ac-config-default)
 (setq tab-always-indent 'complete)
 (add-to-list 'completion-styles 'initials t)
+
 (require 'package)
-(byte-recompile-directory (expand-file-name "~/.emacs.d") 0)
-(add-to-list 'package-archives '("marmalade" .
-				 "https://marmalade-repo.org/packages/") t)
-(add-to-list 'package-archives '("Melpa" .
-				 "https://melpa.org/packages/") t)
+(let* ((no-ssl (and (memq system-type '(windows-nt ms-dos))
+                    (not (gnutls-available-p))))
+       (proto (if no-ssl "http" "https")))
+  ;; Comment/uncomment these two lines to enable/disable MELPA and MELPA Stable as desired
+  (add-to-list 'package-archives (cons "melpa" (concat proto "://melpa.org/packages/")) t)
+  ;;(add-to-list 'package-archives (cons "melpa-stable" (concat proto "://stable.melpa.org/packages/")) t)
+  (when (< emacs-major-version 24)
+    ;; For important compatibility libraries like cl-lib
+    (add-to-list 'package-archives '("gnu" . (concat proto "://elpa.gnu.org/packages/")))))
+(package-initialize)
+
+
+
 (global-set-key [f5] 'compile)
 (setenv "GOPATH" (concat (getenv "HOME") "/go"))
 (setenv "RUBYLIB" "/Users/badgerjh/scripts")
@@ -62,6 +71,8 @@
 (add-to-list 'auto-mode-alist '("\\.red$" . red-mode))
 (add-to-list 'interpreter-mode-alist '("red" . red-mode))
 
+(add-hook 'nim-mode-hook 'nimsuggest-mode)
+(setq nimsuggest-path "/usr/local/bin/nimsuggest")
 (defun my-nim-mode-config ()
   "For use in `nim-mode-hook'."
   (local-set-key (kbd "<f5>") 'nim-compile) ; add a key
@@ -136,7 +147,7 @@
  '(custom-enabled-themes (quote (tango-dark)))
  '(package-selected-packages
    (quote
-    (typescript-mode cider newlisp-mode slime js2-mode js-comint kotlin-mode rust-mode swift-mode suggest nim-mode clojure-mode flycheck geiser go-autocomplete paredit))))
+    (flycheck-nim flycheck-nimsuggest org-ac dna-mode ac-slime ac-geiser typescript-mode cider newlisp-mode slime js2-mode js-comint kotlin-mode rust-mode swift-mode suggest nim-mode clojure-mode flycheck geiser go-autocomplete paredit))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
