@@ -147,7 +147,7 @@
  '(custom-enabled-themes (quote (tango-dark)))
  '(package-selected-packages
    (quote
-    (flycheck-nim flycheck-nimsuggest org-ac dna-mode ac-slime ac-geiser typescript-mode cider newlisp-mode slime js2-mode js-comint kotlin-mode rust-mode swift-mode suggest nim-mode clojure-mode flycheck geiser go-autocomplete paredit))))
+    (markdown-mode flycheck-nim flycheck-nimsuggest org-ac dna-mode ac-slime ac-geiser typescript-mode cider newlisp-mode slime js2-mode js-comint kotlin-mode rust-mode swift-mode suggest nim-mode clojure-mode flycheck geiser go-autocomplete paredit))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
