@@ -24,7 +24,11 @@
     (add-to-list 'package-archives '("gnu" . (concat proto "://elpa.gnu.org/packages/")))))
 (package-initialize)
 
+(defun notebook ()
+  (interactive)
+  (find-file (expand-file-name "~/Dropbox/notebook/main.md")))
 
+(global-set-key [f2] 'notebook)
 
 (global-set-key [f5] 'compile)
 (setenv "GOPATH" (concat (getenv "HOME") "/go"))
