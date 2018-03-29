@@ -24,6 +24,8 @@
     (add-to-list 'package-archives '("gnu" . (concat proto "://elpa.gnu.org/packages/")))))
 (package-initialize)
 
+(setq forth-executable "~/bin/pforth")
+
 (defun notebook ()
   (interactive)
   (find-file (expand-file-name "~/Dropbox/notebook/main.md")))
@@ -151,7 +153,7 @@
  '(custom-enabled-themes (quote (tango-dark)))
  '(package-selected-packages
    (quote
-    (markdown-mode flycheck-nim flycheck-nimsuggest org-ac dna-mode ac-slime ac-geiser typescript-mode cider newlisp-mode slime js2-mode js-comint kotlin-mode rust-mode swift-mode suggest nim-mode clojure-mode flycheck geiser go-autocomplete paredit))))
+    (forth-mode picolisp-mode markdown-mode flycheck-nim flycheck-nimsuggest org-ac dna-mode ac-slime ac-geiser typescript-mode cider newlisp-mode slime js2-mode js-comint kotlin-mode rust-mode swift-mode suggest nim-mode clojure-mode flycheck geiser go-autocomplete paredit))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
