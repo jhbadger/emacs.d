@@ -24,7 +24,7 @@
     (add-to-list 'package-archives '("gnu" . (concat proto "://elpa.gnu.org/packages/")))))
 (package-initialize)
 
-(setq forth-executable "~/bin/pforth")
+(setq forth-executable "/Users/badgerjh/bin/pforth")
 
 (defun notebook ()
   (interactive)
