@@ -8,6 +8,7 @@
 (setq w32-pass-apps-to-system nil)
 (setq w32-apps-modifier 'hyper)
 
+(add-to-list 'auto-mode-alist '("\\.pro\\'" . prolog-mode))
 (ac-config-default)
 (setq tab-always-indent 'complete)
 (add-to-list 'completion-styles 'initials t)
