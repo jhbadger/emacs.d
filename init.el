@@ -154,7 +154,7 @@
  '(custom-enabled-themes (quote (tango-dark)))
  '(package-selected-packages
    (quote
-    (dart-mode forth-mode picolisp-mode markdown-mode flycheck-nim flycheck-nimsuggest org-ac dna-mode ac-slime ac-geiser typescript-mode cider newlisp-mode slime js2-mode js-comint kotlin-mode rust-mode swift-mode suggest nim-mode clojure-mode flycheck geiser go-autocomplete paredit))))
+    (dash-functional nov forth-mode picolisp-mode markdown-mode flycheck-nim flycheck-nimsuggest org-ac dna-mode ac-slime ac-geiser typescript-mode cider newlisp-mode slime js2-mode js-comint kotlin-mode rust-mode swift-mode suggest nim-mode clojure-mode flycheck geiser go-autocomplete paredit))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -169,3 +169,6 @@
             (local-set-key (kbd "C-c b") 'js-send-buffer)
             (local-set-key (kbd "C-c C-b") 'js-send-buffer-and-go)
             (local-set-key (kbd "C-c l") 'js-load-file-and-go)))
+
+
+(add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode))
