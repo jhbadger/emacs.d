@@ -170,5 +170,5 @@
             (local-set-key (kbd "C-c C-b") 'js-send-buffer-and-go)
             (local-set-key (kbd "C-c l") 'js-load-file-and-go)))
 
-
+(add-hook 'zig-mode-hook (lambda () (setq indent-tabs-mode nil)))
 (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode))
