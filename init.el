@@ -154,7 +154,7 @@
  '(custom-enabled-themes (quote (tango-dark)))
  '(package-selected-packages
    (quote
-    (zig-mode dash-functional nov forth-mode picolisp-mode markdown-mode flycheck-nim flycheck-nimsuggest org-ac dna-mode ac-slime ac-geiser typescript-mode cider newlisp-mode slime js2-mode js-comint kotlin-mode rust-mode swift-mode suggest nim-mode clojure-mode flycheck geiser go-autocomplete paredit))))
+    (htmlize zig-mode dash-functional nov forth-mode picolisp-mode markdown-mode flycheck-nim flycheck-nimsuggest org-ac dna-mode ac-slime ac-geiser typescript-mode cider newlisp-mode slime js2-mode js-comint kotlin-mode rust-mode swift-mode suggest nim-mode clojure-mode flycheck geiser go-autocomplete paredit))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -172,3 +172,22 @@
 
 (add-hook 'zig-mode-hook (lambda () (setq indent-tabs-mode nil)))
 (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode))
+
+(require 'org)
+(define-key global-map "\C-cl" 'org-store-link)
+(define-key global-map "\C-ca" 'org-agenda)
+(setq org-log-done t)
+(setq org-agenda-files (list "~/org/work.org"
+                             "~/org/learn.org" 
+                             "~/org/home.org"))
+;; active Babel languages
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((R . t)
+   (emacs-lisp . t)
+   (ruby . t)
+   (python . t)))
+
+(setq org-confirm-babel-evaluate nil
+      org-src-fontify-natively t
+      org-src-tab-acts-natively t)
