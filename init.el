@@ -26,8 +26,12 @@
  '((R . t)
    (emacs-lisp . t)
    (ruby . t)
+   (python . t)
+   (hy . t)
+   (nim . t)
    ))
 (setenv "RUBYLIB" "/Users/badgerjh/scripts")
+(setenv "PATH" (concat (getenv "HOME") "/bin:" (getenv "PATH")))
 (setenv "PATH" (concat "/usr/local/bin:" (getenv "PATH")))
 (setq exec-path (cons "/usr/local/bin:" exec-path))
 
