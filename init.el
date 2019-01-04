@@ -10,7 +10,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (paredit-menu auto-complete ess ob-hy hy-mode crystal-mode slime ob-nim ob-prolog ruby-compilation nim-mode cider))))
+    (nov paredit-menu auto-complete ess ob-hy hy-mode crystal-mode slime ob-nim ob-prolog ruby-compilation nim-mode cider))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -30,6 +30,11 @@
 (setenv "RUBYLIB" "/Users/badgerjh/scripts")
 (setenv "PATH" (concat "/usr/local/bin:" (getenv "PATH")))
 (setq exec-path (cons "/usr/local/bin:" exec-path))
+
+(setq ispell-program-name
+      (string-trim (shell-command-to-string "which ispell")))
+
+(add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode))
 
 (global-set-key [f5] 'compile)
 (global-set-key [f7] 'paredit-mode)
