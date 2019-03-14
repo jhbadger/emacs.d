@@ -18,10 +18,6 @@
  ;; If there is more than one, they won't work right.
  )
 
-(load (expand-file-name "~/quicklisp/slime-helper.el"))
-  ;; Replace "sbcl" with the path to your implementation
-  (setq inferior-lisp-program "sbcl")
-
 (ac-config-default)
 (setq org-confirm-babel-evaluate nil)
 ;; active Babel languages
@@ -40,7 +36,7 @@
 (setq exec-path (cons "/usr/local/bin" exec-path))
 
 (setq ispell-program-name
-      (string-trim (shell-command-to-string "which ispell")))
+      (shell-command-to-string "which ispell"))
 
 (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode))
 
