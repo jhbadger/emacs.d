@@ -32,7 +32,8 @@
 (setq smart-tab-completion-functions-alist 
       '((emacs-lisp-mode . lisp-complete-symbol) 
         (text-mode . dabbrev-completion) ;; this is the "default" emacs expansion function
-        (lisp-mode . slime-complete-symbol)))
+        (lisp-mode . slime-complete-symbol)
+	(slime-repl-mode . slime-complete-symbol)))
 
 
 
