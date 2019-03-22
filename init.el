@@ -18,6 +18,24 @@
  ;; If there is more than one, they won't work right.
  )
 
+(slime-setup '(slime-repl   ; <<----- 
+               slime-mrepl 
+               slime-asdf 
+               slime-sprof 
+               slime-compiler-notes-tree 
+               slime-hyperdoc 
+               slime-indentation 
+               slime-media 
+               slime-fancy))
+(global-smart-tab-mode 1) ;; switch on smart-tab everywhere
+
+(setq smart-tab-completion-functions-alist 
+      '((emacs-lisp-mode . lisp-complete-symbol) 
+        (text-mode . dabbrev-completion) ;; this is the "default" emacs expansion function
+        (lisp-mode . slime-complete-symbol)))
+
+
+
 (ac-config-default)
 (setq org-confirm-babel-evaluate nil)
 ;; active Babel languages
