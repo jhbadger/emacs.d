@@ -10,7 +10,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (malyon haskell-mode elm-mode w3m nov paredit-menu auto-complete ess ob-hy hy-mode crystal-mode slime ob-nim ob-prolog ruby-compilation nim-mode cider))))
+    (zig-mode malyon haskell-mode elm-mode w3m nov paredit-menu auto-complete ess ob-hy hy-mode crystal-mode slime ob-nim ob-prolog ruby-compilation nim-mode cider))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
