@@ -52,6 +52,17 @@
 
 (defun my-nim-mode-config ()
   "For use in `nim-mode-hook'."
-  (local-set-key (kbd "<f5>") 'nim-compile) ; add a key
-  (local-set-key (kbd "H-c") 'nim-compile) ; add a key
+  (local-set-key (kbd "<f5>") 'nim-compile)
+  (local-set-key (kbd "H-c") 'nim-compile)
   )
+(add-hook 'nim-mode-hook 'my-nim-mode-config)
+
+
+(defun my-racket-mode-config ()
+  (local-set-key (kbd "M-p") 'paredit-mode)
+  (local-set-key (kbd "M-r") 'racket-run)
+  (local-set-key (kbd "M-n") 'racket-describe)
+  )
+(add-hook 'racket-mode-hook 'my-racket-mode-config)
+(add-hook 'racket-repl-mode-hook 'my-racket-mode-config)
+
