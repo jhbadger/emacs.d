@@ -1,4 +1,5 @@
 (require 'package)
+(setq-default indent-tabs-mode nil)
 (load-theme 'tango-dark)
 (add-to-list 'package-archives
 	     '("melpa" . "https://melpa.org/packages/") t)
@@ -10,7 +11,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (company zig-mode malyon haskell-mode elm-mode w3m nov paredit-menu ess ob-hy hy-mode crystal-mode ob-nim ob-prolog ruby-compilation nim-mode cider))))
+    (sly smalltalk-mode company zig-mode malyon haskell-mode elm-mode w3m nov paredit-menu ess ob-hy hy-mode crystal-mode ob-nim ob-prolog ruby-compilation nim-mode cider))))
 
 (add-hook 'after-init-hook 'global-company-mode)
 
@@ -66,3 +67,9 @@
 (add-hook 'racket-mode-hook 'my-racket-mode-config)
 (add-hook 'racket-repl-mode-hook 'my-racket-mode-config)
 
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
