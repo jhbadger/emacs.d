@@ -1,5 +1,6 @@
 (require 'package)
 (setq-default indent-tabs-mode nil)
+(setq large-file-warning-threshold 100000000)
 (load-theme 'tango-dark)
 (add-to-list 'package-archives
 	     '("melpa" . "https://melpa.org/packages/") t)
